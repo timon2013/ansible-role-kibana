@@ -24,7 +24,7 @@
     owner: "{{ kibana_user }}"
     group: "{{ kibana_group }}"
     mode: 0640
-  when: kibana_copy_ssl_from_vault_file is defined
+  when: kibana_copy_ssl_from_vault_file
 
 - name: Copy certificate for ssl
   copy:
@@ -33,4 +33,4 @@
     owner: "{{ kibana_user }}"
     group: "{{ kibana_group }}"
     mode: 0640
-  when: kibana_copy_ssl_from_vault_file is defined
+  when: kibana_copy_ssl_from_vault_file
