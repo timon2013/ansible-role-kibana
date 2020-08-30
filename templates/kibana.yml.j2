@@ -1,3 +1,9 @@
 ### Managed by Ansible ###
 
 {{ kibana_config_variables | to_nice_yaml }}
+
+{% if kibana_copy_ssl_from_vault_file is not none %}
+    {{ kibana_config_ssl_variables | to_nice_yaml }}
+{% else %}
+    NONE
+{% endif %}

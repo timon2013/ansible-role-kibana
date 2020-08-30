@@ -33,6 +33,8 @@ kibana_config_variables:
   opendistro_security.multitenancy.enabled: true
   opendistro_security.multitenancy.tenants.preferred: ["Private", "Global"]
   opendistro_security.readonly_mode.roles: ["kibana_read_only"]
+
+kibana_config_ssl_variables:
   server.ssl.enabled: true
   server.ssl.certificate: "{{ kibana_ssl_cert_path }}"
   server.ssl.key: "{{ kibana_ssl_key_path }}"
