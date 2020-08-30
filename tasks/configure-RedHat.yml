@@ -1,0 +1,36 @@
+- name: Add Configurations - kibana.yml
+  template: 
+    src: templates/kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    mode: 0644
+
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+  loop:
+    - "{{ kibana_log_directory }}"
+
+
+- name: Copy certificate key for ssl
+  copy:
+    content: "{{ kibana_ssl_key }}"
+    dest: "{{ kibana_ssl_key_path }}"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    mode: 0640
+  when: kibana_copy_ssl_from_vault_file is defined
+
+- name: Copy certificate for ssl
+  copy:
+    content: "{{ kibana_ssl_cert }}"
+    dest: "{{ kibana_ssl_cert_path }}"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    mode: 0640
+  when: kibana_copy_ssl_from_vault_file is defined
