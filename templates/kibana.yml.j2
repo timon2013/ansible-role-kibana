@@ -2,7 +2,7 @@
 
 {{ kibana_config_variables | to_nice_yaml }}
 
-{% if kibana_copy_ssl_from_vault_file %}
+{% if kibana_copy_ssl_from_variable %}
 {{ kibana_config_ssl_variables | to_nice_yaml }}
 {% elif kibana_copy_ssl_from_file %}
 {{ kibana_config_ssl_variables | to_nice_yaml }}
