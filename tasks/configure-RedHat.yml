@@ -5,6 +5,7 @@
     owner: "{{ kibana_user }}"
     group: "{{ kibana_group }}"
     mode: 0644
+  notify: Restart services
 
 - name: Create directories
   file:
@@ -16,21 +17,42 @@
   loop:
     - "{{ kibana_log_directory }}"
 
-
-- name: Copy certificate key for ssl
+- name: Copy certificate key for ssl from variable
   copy:
     content: "{{ kibana_ssl_key }}"
     dest: "{{ kibana_ssl_key_path }}"
     owner: "{{ kibana_user }}"
     group: "{{ kibana_group }}"
     mode: 0640
-  when: kibana_copy_ssl_from_vault_file
+  notify: Restart services
+  when: kibana_copy_ssl_from_variable
 
-- name: Copy certificate for ssl
+- name: Copy certificate for ssl from variable
   copy:
     content: "{{ kibana_ssl_cert }}"
     dest: "{{ kibana_ssl_cert_path }}"
     owner: "{{ kibana_user }}"
     group: "{{ kibana_group }}"
     mode: 0640
-  when: kibana_copy_ssl_from_vault_file
+  notify: Restart services
+  when: kibana_copy_ssl_from_variable
+
+- name: Copy certificate key for ssl from file
+  copy:
+    src: "{{ kibana_ssl_key }}"
+    dest: "{{ kibana_ssl_key_path }}"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    mode: 0640
+  notify: Restart services
+  when: kibana_copy_ssl_from_file
+
+- name: Copy certificate for ssl from file
+  copy:
+    src: "{{ kibana_ssl_cert }}"
+    dest: "{{ kibana_ssl_cert_path }}"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    mode: 0640
+  notify: Restart services
+  when: kibana_copy_ssl_from_file
