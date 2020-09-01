@@ -20,6 +20,7 @@ kibana_group: kibana
 
 #kibana_copy_ssl_from_vault_file:
 kibana_copy_ssl_from_variable: false
+kibana_copy_ssl_from_file: false
 
 kibana_config_variables:
   server.host: "{{ kibana_listen_host }}"

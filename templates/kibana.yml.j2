@@ -4,4 +4,6 @@
 
 {% if kibana_copy_ssl_from_vault_file %}
 {{ kibana_config_ssl_variables | to_nice_yaml }}
+{% elif kibana_copy_ssl_from_file %}
+{{ kibana_config_ssl_variables | to_nice_yaml }}
 {% endif %}
