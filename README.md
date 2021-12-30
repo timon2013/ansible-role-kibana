@@ -1,31 +1,55 @@
-Role Name
+Kibana
 =========
 
-A brief description of the role goes here.
+The Kibana instalation role for opendistro.
+Documentation: https://opendistro.github.io/for-elasticsearch-docs/docs/kibana/
+
+Build
+------------
+
+Master branch:
+
+Dev Branch:
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+```bash
+meta/main.yml
+```
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Default variables are in defaults directory.
+
+| Name | Default               | Type          | Description                       |
+| ---- | --------------------- | ------------- | ----------------------------------|
+
+
+
+| `redhat_packages` | defaults/main.yml     | Array         | Packages for installation         |
+| `redhat_services` | elasticsearch.service | Array         | List of services to be launched   |
+| `default_security_plugins` | true                  | Bool          | Installing the default configuration of the security plugins |
+| `default_es_conf` | true | Bool | Installing the default configuration of the opendistro, only for elasticsearch.yml file. |
+| `default_jvm_conf` | true | Bool | Installing the default configuration of the jvm, only for jvm.options file. |
+| `opendistro_security_plugin_files` | defaults/main.yml | Array | The security configuration for plugin opendistro_security in yaml format. |
+| `security_plugin_passwords`| defaults/main.yml | Array | The login and password for opendistro users. The sequence is important and dependent from opendistro_security_plugin_files configuration. |
+| `opendistro_db_dir` | /var/lib/elasticsearch | String | The path to elasticsearch databases directory |
+| `opendistro_http_port` | 9200 | Number | The http port for elasticsearch |
+| `opendistro_log_dir` | /var/log/elasticsearch | String | The path to log directory |
+| `opendistro_elasticsearch_variables` | deafults/main.yml | Array | The configuration for elasticsearch in elasticsearch.yml file. This is yaml format. |
+| `opendistro_java_home` | /usr/lib/jvm/java-11 | String | The path to java home direcotry |
+| `opendistro_java_variables` | defaults/main.yml | Array | The configuration for jvm in jvm.options file. |
+| `opendistro_plugin_dir` | /usr/share/elasticsearch/plugins | String | The path to plugin directory |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
 
 License
 -------
@@ -35,4 +59,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+timon2013
